@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoClip AI - Big Video to 9:16 Shorts with Highlighted Subtitles</title>
+  <link rel="stylesheet" href="/static/css/style.css?v=caption-options">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo-area">
+      <div class="logo-icon">⚡</div>
+      <div class="logo-text">
+        <h1>AutoClip AI</h1>
+        <span>Viral Shorts Studio</span>
+      </div>
+    </div>
+    <div class="header-badges">
+      <span class="badge">9:16 Vertical Shorts</span>
+      <span class="badge badge-yellow">Word-Highlighted Subtitles</span>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main>
+    <section class="hero-section">
+      <h2>Turn Long Videos & Streams into Viral 9:16 Shorts</h2>
+      <p>Create a 45-second or one-minute vertical clip with large captions and an opening title.</p>
+    </section>
+
+    <!-- Studio Panel -->
+    <div class="studio-grid">
+      <!-- Input Tabs -->
+      <div class="tabs">
+        <button id="tab-url-btn" class="tab-btn active">
+          <span>🔗</span> YouTube / Stream URL
+        </button>
+        <button id="tab-upload-btn" class="tab-btn">
+          <span>📁</span> Upload Local Video
+        </button>
+      </div>
+
+      <!-- Tab Content: URL -->
+      <div id="tab-url-pane" class="tab-pane active">
+        <div class="url-input-group">
+          <input type="text" id="youtube-url-input" placeholder="Paste YouTube video or livestream URL (e.g. https://www.youtube.com/watch?v=...)">
+        </div>
+      </div>
+
+      <!-- Tab Content: Upload -->
+      <div id="tab-upload-pane" class="tab-pane">
+        <div id="dropzone" class="dropzone">
+          <div class="dropzone-icon">📁</div>
+          <p><strong>Click to browse</strong> or drag & drop long video file</p>
+          <p style="font-size: 0.8rem; margin-top: 0.35rem; color: var(--text-muted);">Supports MP4, MKV, MOV, WebM (any length)</p>
+        </div>
+        <input type="file" id="file-input" accept="video/*" style="display: none;">
+
+        <div id="file-info-chip" class="file-info-chip">
+          <div>
+            <span>🎬 </span>
+            <strong id="file-name-span">video.mp4</strong>
+          </div>
+          <button id="file-remove-btn" style="background:transparent; border:none; color: #ff4560; cursor:pointer; font-weight:600;">Remove</button>
+        </div>
+      </div>
+
+      <!-- Settings Section -->
+      <div class="settings-section">
+        <div class="setting-group">
+          <label for="clip-selection">Clip selection</label>
+          <select id="clip-selection">
+            <option value="auto">Automatic highlights</option>
+            <option value="range">Exact time range</option>
+          </select>
+        </div>
+        <div class="setting-group" id="start-group" hidden>
+          <label for="range-start">Start time</label>
+          <input id="range-start" type="text" placeholder="01:25:10" aria-describedby="range-hint">
+        </div>
+        <div class="setting-group" id="end-group" hidden>
+          <label for="range-end">End time</label>
+          <input id="range-end" type="text" placeholder="01:25:50" aria-describedby="range-hint">
+          <small id="range-hint">Time from the start of the video or broadcast. Use HH:MM:SS, MM:SS, or seconds.</small>
+        </div>
+        <fieldset class="caption-options" id="caption-options">
+          <legend>Clip subtitles</legend>
+          <label><input type="radio" name="caption-mode" value="burn" checked> With subtitles</label>
+          <label><input type="radio" name="caption-mode" value="off"> Without subtitles</label>
+          <label><input type="radio" name="caption-mode" value="files"> Separate subtitle files</label>
+        </fieldset>
+        <div class="setting-group">
+          <label for="scan-mode">Processing mode</label>
+          <select id="scan-mode"><option value="fast-hd" selected>Fast · 1080p</option><option value="fast">Fast · 720p</option><option value="full">Full transcript scan · 1080p</option></select>
+          <small>Fast mode uses replay peaks or spaced samples. Live streams capture the length you choose.</small>
+        </div>
+        <div class="setting-group">
+          <label for="clip-count-select">Number of Clips</label>
+          <select id="clip-count-select">
+            <option value="1" selected>1 clip</option>
+            <option value="3">3 clips</option>
+            <option value="5">5 Viral Clips</option>
+            <option value="7">7 clips</option>
+            <option value="10">10 Viral Clips (Maximum Coverage)</option>
+          </select>
+        </div>
+
+        <div class="setting-group">
+          <label for="clip-seconds">Clip length</label>
+          <select id="clip-seconds">
+            <option value="45">45 seconds</option>
+            <option value="60" selected>1 minute</option>
+          </select>
+        </div>
+
+        <!-- 9:16 Framing Mode -->
+        <div class="setting-group">
+          <label for="framing-mode-select">9:16 Framing Layout</label>
+          <select id="framing-mode-select">
+            <option value="stacked" selected>Streamer face above video · auto-detect webcam</option>
+            <option value="stacked_left_middle">Webcam at middle left (above minimap)</option>
+            <option value="stacked_top_left">Camera at top left</option>
+            <option value="stacked_top_right">Camera at top right</option>
+            <option value="stacked_bottom_left">Camera at bottom left</option>
+            <option value="stacked_bottom_right">Camera at bottom right</option>
+            <option value="fit_blur">Fit + Blurred Ambient Background</option>
+            <option value="center_crop">Direct Center Crop 9:16</option>
+            <option value="smart_crop">Smart Face-Tracking Crop</option>
+          </select>
+        </div>
+
+        <!-- Subtitle Preset -->
+        <div class="setting-group">
+          <label for="subtitle-style-select">Subtitle Style</label>
+          <select id="subtitle-style-select">
+            <option value="neon_yellow" selected>Neon Yellow (Alex Hormozi Style)</option>
+            <option value="electric_green">Electric Green (MrBeast Style)</option>
+            <option value="vibrant_cyan">Electric Cyan (Cyber Style)</option>
+            <option value="sunset_orange">Sunset Coral / Orange</option>
+          </select>
+          <div id="subtitle-pill" class="subtitle-preview-pill">
+            THE <span style="color: #ffe600">HIGHLIGHTED WORD</span> POPS
+          </div>
+        </div>
+
+        <!-- Whisper Speed Mode -->
+        <div class="setting-group">
+          <label for="whisper-model-select">Transcription Speed</label>
+          <select id="whisper-model-select">
+            <option value="tiny" selected>⚡ Fast (tiny model)</option>
+            <option value="base">🎯 Standard Quality (base)</option>
+          </select>
+        </div>
+
+      </div>
+
+      <!-- Collapsible API Keys Section (Optional) -->
+      <details style="margin-top: 1rem; border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 0.8rem 1.2rem; background: var(--bg-primary);">
+        <summary style="cursor: pointer; font-size: 0.9rem; font-weight: 600; color: var(--text-muted);">
+          ⚙️ Optional API Keys (Cloud highlights & transcription)
+        </summary>
+        <p style="font-size: 0.8rem; color: var(--accent-cyan); margin: 0.75rem 0;">
+          💡 <strong>Tip:</strong> Optional! AutoClip works 100% free and offline. A Groq key enables cloud transcription.
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 0.5rem;">
+          <div class="setting-group">
+            <label for="gemini-key-input">Gemini API Key</label>
+            <input type="password" id="gemini-key-input" placeholder="AIzaSy...">
+          </div>
+          <div class="setting-group">
+            <label for="groq-key-input">Groq API Key (Instant Cloud Whisper)</label>
+            <input type="password" id="groq-key-input" placeholder="gsk_...">
+          </div>
+          <div class="setting-group">
+            <label for="openai-key-input">OpenAI API Key</label>
+            <input type="password" id="openai-key-input" placeholder="sk-...">
+          </div>
+        </div>
+      </details>
+
+      <!-- Action Button -->
+      <button id="generate-btn" class="cta-btn">
+        ✨ Generate shorts
+      </button>
+    </div>
+
+    <!-- Live Progress Section -->
+    <div id="progress-card" class="progress-card">
+      <div class="progress-header">
+        <h3>Generating Viral Shorts Pipeline</h3>
+        <span id="progress-percent-text" style="font-weight: 800; color: var(--accent-cyan);">0%</span>
+      </div>
+      <div class="progress-bar-container">
+        <div id="progress-bar-fill" class="progress-bar-fill"></div>
+      </div>
+      <button type="button" id="cancel-job-btn" class="btn-sub" hidden>Cancel generation</button>
+      <div role="status" id="progress-status-text" class="progress-status-text">
+        <div class="spinner"></div> <span>Initializing video pipeline...</span>
+      </div>
+    </div>
+
+    <!-- Results Section -->
+    <div id="results-section" class="results-section">
+      <div class="results-topbar">
+        <h3 id="clips-count-title">Generated Viral 9:16 Shorts</h3>
+        <a id="download-zip-btn" href="#" class="btn-zip">
+          📦 Download All Shorts (ZIP)
+        </a>
+      </div>
+      <div id="clips-grid" class="clips-grid">
+        <!-- Rendered clip cards will appear here -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>AutoClip AI • Built for Creators, Editors & Streamers • 9:16 Shorts with Dynamic Highlighted Subtitles</p>
+  </footer>
+
+  <script src="/static/js/app.js?v=time-range"></script>
+</body>
+</html>
